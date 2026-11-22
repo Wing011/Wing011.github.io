@@ -2,246 +2,541 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>陳亮宇 — 產品工程師</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sonia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#0E1A17; --panel:#13241F; --paper:#F3EFE4; --amber:#E3B23C; --sage:#90A89C; --line:#2B3A35;
-  color-scheme: dark;
+:root {
+  --bg:       #F3EDE4;
+  --bg-alt:   #EBE3D8;
+  --card:     #FDFBF7;
+  --text:     #2D2926;
+  --text-mid: #6B6460;
+  --text-lt:  #9B9490;
+  --sage:     #7A8E7A;
+  --sage-dk:  #5F7360;
+  --sage-lt:  #C5D1C0;
+  --warm:     #C2B4A2;
+  --warm-lt:  #DDD4C8;
+  --line:     #D8CFC3;
+  --clay:     #B09A84;
+  --ink:      #3A3530;
 }
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){ --ink:#0E1A17; --panel:#13241F; --paper:#F3EFE4; --amber:#E3B23C; --sage:#90A89C; --line:#2B3A35; }
-}
-*{box-sizing:border-box;}
-html{scroll-padding-top:env(safe-area-inset-top,0px);}
-body{
-  margin:0; background:var(--ink); color:var(--paper);
-  font-family:'Work Sans',sans-serif; line-height:1.6;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-}
-h1,h2,.serif{font-family:'Fraunces',serif;}
-a{color:var(--amber);}
-.wrap{max-width:720px; margin:0 auto; padding:0 28px;}
-header.hero{padding:120px 0 80px;}
-.eyebrow{color:var(--sage); font-size:15px; margin:0 0 18px;}
-h1{font-size:clamp(40px,7vw,64px); font-weight:600; margin:0 0 20px; line-height:1.08;}
-.lede{font-size:19px; color:#D8D2C2; max-width:52ch; margin:0;}
-.links{margin-top:34px; display:flex; gap:22px; font-size:15px;}
-section{padding:60px 0; border-top:1px solid var(--line);}
-section h2{font-size:26px; font-weight:500; margin:0 0 28px;}
-.about p{color:#D8D2C2; max-width:62ch;}
-.proj{display:flex; gap:24px; padding:22px 0; border-top:1px solid var(--line);}
-.proj:first-of-type{border-top:none;}
-.proj .yr{color:var(--sage); font-variant-numeric:tabular-nums; flex:0 0 52px; padding-top:3px;}
-.proj h3{margin:0 0 6px; font-size:19px; font-weight:600;}
-.proj p{margin:0; color:#C7C1B0; font-size:15px;}
-.proj .tag{display:inline-block; margin-top:10px; font-size:13px; color:var(--amber);}
-footer{padding:50px 0 100px; color:var(--sage); font-size:14px;}
 
-/* --- 客服小機器人 --- */
-#bot-launcher{
-  position:fixed; right:22px; bottom:calc(22px + env(safe-area-inset-bottom,0px)); z-index:999;
-  width:56px; height:56px; border-radius:50%; background:var(--amber); border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.35);
-  transition:transform .15s ease;
-}
-#bot-launcher:hover{transform:scale(1.06);}
-#bot-launcher svg{width:26px; height:26px;}
-#bot-panel{
-  position:fixed; right:22px; bottom:calc(88px + env(safe-area-inset-bottom,0px)); z-index:999;
-  width:328px; max-width:calc(100vw - 44px); height:440px; max-height:70vh;
-  background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden;
-  display:none; flex-direction:column; box-shadow:0 20px 50px rgba(0,0,0,.5);
-}
-#bot-panel.open{display:flex;}
-.bot-head{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--line);}
-.bot-head span{font-weight:600; font-size:15px;}
-.bot-head .btns{display:flex; gap:10px;}
-.bot-head button{background:none; border:none; color:var(--sage); cursor:pointer; padding:4px;}
-.bot-head button:hover{color:var(--paper);}
-#bot-msgs{flex:1; overflow-y:auto; padding:14px 16px; display:flex; flex-direction:column; gap:10px; font-size:14px;}
-.msg{max-width:85%; padding:9px 12px; border-radius:12px; line-height:1.5;}
-.msg.bot{background:#1D322C; align-self:flex-start; border-bottom-left-radius:3px;}
-.msg.user{background:var(--amber); color:#1A1308; align-self:flex-end; border-bottom-right-radius:3px;}
-.msg.sys{color:var(--sage); font-size:13px; align-self:center;}
-#bot-form{display:flex; gap:8px; padding:12px; border-top:1px solid var(--line);}
-#bot-input{flex:1; background:#0E1A17; border:1px solid var(--line); border-radius:10px; color:var(--paper); padding:9px 12px; font-size:14px; font-family:inherit;}
-#bot-input:focus{outline:1px solid var(--amber);}
-#bot-form button{background:var(--amber); border:none; border-radius:10px; padding:0 14px; cursor:pointer; font-weight:600;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-#bot-settings{
-  position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.55);
-  display:none; align-items:center; justify-content:center; padding:20px;
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 120px;
+  position: relative;
+  overflow-x: hidden;
 }
-#bot-settings.open{display:flex;}
-.settings-card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:24px; width:100%; max-width:380px;}
-.settings-card h3{margin:0 0 6px; font-size:18px; font-family:'Fraunces',serif;}
-.settings-card p{margin:0 0 16px; color:var(--sage); font-size:13px;}
-.settings-card label{display:block; font-size:13px; color:#D8D2C2; margin-bottom:6px;}
-.settings-card input{width:100%; background:#0E1A17; border:1px solid var(--line); color:var(--paper); border-radius:8px; padding:10px 12px; font-size:14px; font-family:inherit; margin-bottom:16px;}
-.settings-card .row{display:flex; gap:10px; justify-content:flex-end;}
-.settings-card button{border-radius:8px; padding:9px 16px; font-size:14px; cursor:pointer; border:none; font-family:inherit;}
-.btn-ghost{background:transparent; border:1px solid var(--line) !important; color:var(--paper);}
-.btn-amber{background:var(--amber); font-weight:600;}
+
+/* decorative circle (enso-inspired) */
+body::before {
+  content: '';
+  position: fixed;
+  top: -180px;
+  right: -180px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid var(--warm-lt);
+  opacity: 0.45;
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -120px;
+  left: -120px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 1px solid var(--sage-lt);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* main content */
+.main {
+  max-width: 560px;
+  width: 100%;
+  animation: fadeUp 1s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* name */
+.name {
+  font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
+  font-size: clamp(48px, 10vw, 72px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+/* decorative line */
+.divider {
+  width: 48px;
+  height: 1px;
+  background: var(--sage);
+  margin: 28px 0;
+  opacity: 0.6;
+}
+
+/* bio */
+.bio {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 2;
+  letter-spacing: 0.02em;
+  max-width: 480px;
+}
+
+/* subtle footer */
+.foot {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: var(--text-lt);
+  letter-spacing: 0.06em;
+}
+
+/* SUDOKU floating corner widget */
+
+#sudoku-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 900;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#sudoku-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+#sudoku-btn svg { width: 24px; height: 24px; }
+
+/* panel */
+#sudoku-panel {
+  position: fixed;
+  bottom: 92px;
+  right: 28px;
+  z-index: 900;
+  width: 370px;
+  max-width: calc(100vw - 40px);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: panelIn 0.3s ease;
+}
+#sudoku-panel.open { display: flex; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.sdk-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.sdk-head span {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+.sdk-head-btns { display: flex; gap: 6px; }
+.sdk-head-btns button {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text-mid);
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.sdk-head-btns button:hover {
+  background: var(--bg-alt);
+  color: var(--ink);
+}
+
+.sdk-body { padding: 20px; display: flex; flex-direction: column; align-items: center; }
+
+/* grid */
+.sdk-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: 324px;
+  aspect-ratio: 1;
+  border: 2px solid var(--ink);
+}
+
+.sdk-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--card);
+  border: 0.5px solid var(--line);
+  transition: background 0.12s;
+  position: relative;
+  color: var(--text);
+  user-select: none;
+}
+.sdk-cell:hover { background: var(--bg); }
+.sdk-cell.selected { background: var(--sage-lt); }
+.sdk-cell.fixed { color: var(--ink); font-weight: 500; cursor: default; }
+.sdk-cell.user-input { color: var(--sage-dk); }
+.sdk-cell.error { color: #C0564F; background: #F8EDEB; }
+.sdk-cell.highlight { background: #EDE8DF; }
+
+/* thick borders for 3x3 boxes */
+.sdk-cell.br3 { border-right: 2px solid var(--ink); }
+.sdk-cell.bb3 { border-bottom: 2px solid var(--ink); }
+
+/* number pad */
+.sdk-numpad {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sdk-numpad button {
+  width: 32px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.sdk-numpad button:hover {
+  background: var(--sage-lt);
+  border-color: var(--sage);
+}
+.sdk-numpad button.erase {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  width: auto;
+  padding: 0 10px;
+  color: var(--text-mid);
+}
+
+.sdk-status {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-lt);
+  text-align: center;
+  min-height: 20px;
+}
+
+/* responsive */
+@media (max-width: 480px) {
+  body { padding: 40px 20px 100px; justify-content: flex-start; padding-top: 25vh; }
+  #sudoku-panel { right: 8px; bottom: 80px; width: calc(100vw - 16px); }
+  #sudoku-btn { right: 16px; bottom: 16px; }
+  .sdk-cell { font-size: 14px; }
+}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header class="hero">
-    <p class="eyebrow">你好，我是</p>
-    <h1>陳亮宇<br>做工具，也做介面。</h1>
-    <p class="lede">一名產品工程師，專注於把複雜的後端邏輯收進簡單的畫面裡。目前接案與自建小工具並行，偶爾寫點筆記。</p>
-    <div class="links">
-      <a href="mailto:hello@example.com">hello@example.com</a>
-      <a href="#" target="_blank">GitHub</a>
-      <a href="#" target="_blank">LinkedIn</a>
-    </div>
-  </header>
-
-  <section class="about">
-    <h2>關於我</h2>
-    <p>我在新竹長大，目前於桃園工作。過去幾年主要處理資料串接與自動化流程，近期把重心放在前端體驗與小型 AI 應用的結合，相信好工具應該讓人少打幾行字、少點幾次滑鼠。</p>
-  </section>
-
-  <section>
-    <h2>作品</h2>
-    <div class="proj">
-      <div class="yr">2026</div>
-      <div><h3>隨記 — 語音轉筆記工具</h3><p>把零碎語音念頭即時整理成結構化筆記，支援多語言辨識。</p><span class="tag">個人專案</span></div>
-    </div>
-    <div class="proj">
-      <div class="yr">2025</div>
-      <div><h3>班表小幫手</h3><p>為零售門市設計的排班系統，取代原本的 Excel 流程，減少九成的人工調整時間。</p><span class="tag">接案</span></div>
-    </div>
-    <div class="proj">
-      <div class="yr">2024</div>
-      <div><h3>開源元件庫 Formless</h3><p>一套不帶預設樣式的表單元件庫，讓設計師能完全掌控視覺呈現。</p><span class="tag">開源</span></div>
-    </div>
-  </section>
-
-  <footer>© 2026 陳亮宇．本頁面內容為示範用途，請自行替換為真實資訊。</footer>
+<div class="main">
+  <h1 class="name">Sonia</h1>
+  <div class="divider"></div>
+  <p class="bio">
+    習慣用數獨的排除法過濾雜訊，從歷史與武俠小說裡拆解局勢與選擇，並試著用網頁記錄這些安靜的思考。
+  </p>
 </div>
 
-<!-- 客服機器人 -->
-<button id="bot-launcher" aria-label="打開客服小幫手">
-  <svg viewBox="0 0 24 24" fill="none" stroke="#1A1308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="4" y="8" width="16" height="12" rx="3"/><circle cx="9" cy="14" r="1.2" fill="#1A1308"/><circle cx="15" cy="14" r="1.2" fill="#1A1308"/>
-    <path d="M12 8V4"/><circle cx="12" cy="3" r="1" fill="#1A1308"/>
+<div class="foot">© 2026 Sonia</div>
+
+<!-- Sudoku toggle button -->
+<button id="sudoku-btn" aria-label="數獨遊戲" title="數獨小遊戲">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <line x1="9" y1="3" x2="9" y2="21"/>
+    <line x1="15" y1="3" x2="15" y2="21"/>
+    <line x1="3" y1="9" x2="21" y2="9"/>
+    <line x1="3" y1="15" x2="21" y2="15"/>
   </svg>
 </button>
 
-<div id="bot-panel">
-  <div class="bot-head">
-    <span>小幫手</span>
-    <div class="btns">
-      <button id="bot-settings-btn" aria-label="設定" title="設定">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      </button>
-      <button id="bot-close-btn" aria-label="關閉">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
+<!-- Sudoku panel -->
+<div id="sudoku-panel">
+  <div class="sdk-head">
+    <span>數　獨</span>
+    <div class="sdk-head-btns">
+      <button id="sdk-new">新遊戲</button>
+      <button id="sdk-check">檢查</button>
+      <button id="sdk-close">✕</button>
     </div>
   </div>
-  <div id="bot-msgs"><div class="msg bot">嗨，我是這個網站的小幫手，有什麼想問的嗎？</div></div>
-  <form id="bot-form">
-    <input id="bot-input" type="text" placeholder="輸入訊息…" autocomplete="off">
-    <button type="submit">送出</button>
-  </form>
-</div>
-
-<div id="bot-settings">
-  <div class="settings-card">
-    <h3>客服設定</h3>
-    <p>貼上你部署好的 Google Apps Script 網址（.../exec），訊息會透過它轉送到 OpenRouter。</p>
-    <label for="gas-url-input">GAS 網址</label>
-    <input id="gas-url-input" type="url" placeholder="https://script.google.com/macros/s/xxx/exec">
-    <div class="row">
-      <button class="btn-ghost" id="settings-cancel">取消</button>
-      <button class="btn-amber" id="settings-save">儲存</button>
-    </div>
+  <div class="sdk-body">
+    <div class="sdk-grid" id="sdk-grid"></div>
+    <div class="sdk-numpad" id="sdk-numpad"></div>
+    <div class="sdk-status" id="sdk-status"></div>
   </div>
 </div>
 
 <script>
-(function(){
-  const launcher=document.getElementById('bot-launcher');
-  const panel=document.getElementById('bot-panel');
-  const closeBtn=document.getElementById('bot-close-btn');
-  const settingsBtn=document.getElementById('bot-settings-btn');
-  const settingsModal=document.getElementById('bot-settings');
-  const settingsCancel=document.getElementById('settings-cancel');
-  const settingsSave=document.getElementById('settings-save');
-  const gasInput=document.getElementById('gas-url-input');
-  const form=document.getElementById('bot-form');
-  const input=document.getElementById('bot-input');
-  const msgsEl=document.getElementById('bot-msgs');
+(function () {
+  var btn = document.getElementById('sudoku-btn');
+  var panel = document.getElementById('sudoku-panel');
+  var closeBtn = document.getElementById('sdk-close');
+  btn.addEventListener('click', function() { panel.classList.toggle('open'); });
+  closeBtn.addEventListener('click', function() { panel.classList.remove('open'); });
 
-  let gasUrl='';
-  try{ gasUrl=localStorage.getItem('gasUrl')||''; }catch(e){}
+  var board, solution, fixed, selectedCell = null;
 
-  launcher.addEventListener('click',()=>panel.classList.toggle('open'));
-  closeBtn.addEventListener('click',()=>panel.classList.remove('open'));
-
-  settingsBtn.addEventListener('click',()=>{
-    gasInput.value=gasUrl;
-    settingsModal.classList.add('open');
-  });
-  settingsCancel.addEventListener('click',()=>settingsModal.classList.remove('open'));
-  settingsSave.addEventListener('click',()=>{
-    gasUrl=gasInput.value.trim();
-    try{ localStorage.setItem('gasUrl',gasUrl); }catch(e){}
-    settingsModal.classList.remove('open');
-    addMsg('已儲存 GAS 網址設定。','sys');
-  });
-
-  function addMsg(text,role){
-    const d=document.createElement('div');
-    d.className='msg '+role;
-    d.textContent=text;
-    msgsEl.appendChild(d);
-    msgsEl.scrollTop=msgsEl.scrollHeight;
-    return d;
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = arr[i]; arr[i] = arr[j]; arr[j] = temp;
+    }
+    return arr;
   }
 
-  const history=[];
-
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const text=input.value.trim();
-    if(!text) return;
-    input.value='';
-    addMsg(text,'user');
-    history.push({role:'user', content:text});
-
-    if(!gasUrl){
-      addMsg('尚未設定 GAS 網址，請點右上角齒輪圖示設定。','sys');
-      return;
+  function isValid(b, r, c, n) {
+    for (var i = 0; i < 9; i++) {
+      if (b[r][i] === n || b[i][c] === n) return false;
     }
-    const thinking=addMsg('思考中…','sys');
-    try{
-      const res=await fetch(gasUrl,{
-        method:'POST',
-        headers:{'Content-Type':'text/plain;charset=utf-8'}, // 避免觸發 CORS 預檢
-        body: JSON.stringify({ messages: history })
-      });
-      const data=await res.json();
-      thinking.remove();
-      if(data.reply){
-        addMsg(data.reply,'bot');
-        history.push({role:'assistant', content:data.reply});
-      }else{
-        addMsg('後端回傳格式有誤：'+JSON.stringify(data).slice(0,150),'sys');
+    var br = Math.floor(r / 3) * 3, bc = Math.floor(c / 3) * 3;
+    for (var i = 0; i < 3; i++)
+      for (var j = 0; j < 3; j++)
+        if (b[br + i][bc + j] === n) return false;
+    return true;
+  }
+
+  function solve(b) {
+    for (var r = 0; r < 9; r++)
+      for (var c = 0; c < 9; c++)
+        if (b[r][c] === 0) {
+          var nums = shuffle([1,2,3,4,5,6,7,8,9]);
+          for (var k = 0; k < nums.length; k++) {
+            if (isValid(b, r, c, nums[k])) {
+              b[r][c] = nums[k];
+              if (solve(b)) return true;
+              b[r][c] = 0;
+            }
+          }
+          return false;
+        }
+    return true;
+  }
+
+  function generate(clues) {
+    var b = [];
+    for (var i = 0; i < 9; i++) { b.push([0,0,0,0,0,0,0,0,0]); }
+    for (var box = 0; box < 9; box += 3) {
+      var nums = shuffle([1,2,3,4,5,6,7,8,9]);
+      var idx = 0;
+      for (var i = 0; i < 3; i++)
+        for (var j = 0; j < 3; j++)
+          b[box+i][box+j] = nums[idx++];
+    }
+    solve(b);
+
+    solution = b.map(function(r) { return r.slice(); });
+    board = b.map(function(r) { return r.slice(); });
+    fixed = [];
+    for (var i = 0; i < 9; i++) { fixed.push([true,true,true,true,true,true,true,true,true]); }
+
+    var toRemove = 81 - clues;
+    var positions = [];
+    for (var i = 0; i < 81; i++) positions.push(i);
+    shuffle(positions);
+    for (var i = 0; i < positions.length && toRemove > 0; i++) {
+      var r = Math.floor(positions[i] / 9), c = positions[i] % 9;
+      board[r][c] = 0;
+      fixed[r][c] = false;
+      toRemove--;
+    }
+  }
+
+  var gridEl = document.getElementById('sdk-grid');
+  var numpadEl = document.getElementById('sdk-numpad');
+  var statusEl = document.getElementById('sdk-status');
+
+  function buildGrid() {
+    gridEl.innerHTML = '';
+    for (var r = 0; r < 9; r++) {
+      for (var c = 0; c < 9; c++) {
+        var cell = document.createElement('div');
+        cell.className = 'sdk-cell';
+        cell.dataset.r = r;
+        cell.dataset.c = c;
+        if (c === 2 || c === 5) cell.classList.add('br3');
+        if (r === 2 || r === 5) cell.classList.add('bb3');
+        if (fixed[r][c]) {
+          cell.classList.add('fixed');
+          cell.textContent = board[r][c];
+        } else if (board[r][c] !== 0) {
+          cell.classList.add('user-input');
+          cell.textContent = board[r][c];
+        }
+        (function(r, c) {
+          cell.addEventListener('click', function() { selectCell(r, c); });
+        })(r, c);
+        gridEl.appendChild(cell);
       }
-    }catch(err){
-      thinking.remove();
-      addMsg('連線失敗，請確認 GAS 網址與部署設定是否正確。','sys');
     }
+  }
+
+  function buildNumpad() {
+    numpadEl.innerHTML = '';
+    for (var n = 1; n <= 9; n++) {
+      var b = document.createElement('button');
+      b.textContent = n;
+      (function(n) {
+        b.addEventListener('click', function() { placeNumber(n); });
+      })(n);
+      numpadEl.appendChild(b);
+    }
+    var eraseBtn = document.createElement('button');
+    eraseBtn.textContent = '清除';
+    eraseBtn.className = 'erase';
+    eraseBtn.addEventListener('click', function() { placeNumber(0); });
+    numpadEl.appendChild(eraseBtn);
+  }
+
+  function selectCell(r, c) {
+    selectedCell = {r: r, c: c};
+    updateHighlight();
+  }
+
+  function updateHighlight() {
+    var cells = gridEl.querySelectorAll('.sdk-cell');
+    for (var i = 0; i < cells.length; i++) {
+      var cell = cells[i];
+      cell.classList.remove('selected', 'highlight', 'error');
+      var cr = +cell.dataset.r, cc = +cell.dataset.c;
+      if (selectedCell) {
+        if (cr === selectedCell.r && cc === selectedCell.c) {
+          cell.classList.add('selected');
+        } else if (cr === selectedCell.r || cc === selectedCell.c ||
+          (Math.floor(cr/3) === Math.floor(selectedCell.r/3) &&
+           Math.floor(cc/3) === Math.floor(selectedCell.c/3))) {
+          cell.classList.add('highlight');
+        }
+      }
+    }
+  }
+
+  function placeNumber(n) {
+    if (!selectedCell) return;
+    var r = selectedCell.r, c = selectedCell.c;
+    if (fixed[r][c]) return;
+    board[r][c] = n;
+    var cell = gridEl.children[r * 9 + c];
+    cell.textContent = n === 0 ? '' : n;
+    cell.className = 'sdk-cell' +
+      ((c===2||c===5) ? ' br3' : '') +
+      ((r===2||r===5) ? ' bb3' : '') +
+      (n !== 0 ? ' user-input' : '');
+    updateHighlight();
+    statusEl.textContent = '';
+    if (n !== 0) {
+      var filled = true;
+      for (var i = 0; i < 9; i++)
+        for (var j = 0; j < 9; j++)
+          if (board[i][j] === 0) filled = false;
+      if (filled) checkSolution();
+    }
+  }
+
+  function checkSolution() {
+    var correct = true;
+    var cells = gridEl.querySelectorAll('.sdk-cell');
+    for (var i = 0; i < cells.length; i++) {
+      var r = +cells[i].dataset.r, c = +cells[i].dataset.c;
+      if (board[r][c] !== solution[r][c]) {
+        cells[i].classList.add('error');
+        correct = false;
+      }
+    }
+    statusEl.textContent = correct ? '✓ 完美！所有數字都正確。' : '有些數字不太對，再想想看。';
+    statusEl.style.color = correct ? 'var(--sage-dk)' : '#C0564F';
+  }
+
+  function newGame() {
+    generate(36);
+    selectedCell = null;
+    statusEl.textContent = '';
+    statusEl.style.color = '';
+    buildGrid();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!selectedCell || !panel.classList.contains('open')) return;
+    var key = e.key;
+    if (key >= '1' && key <= '9') { placeNumber(+key); }
+    else if (key === 'Backspace' || key === 'Delete' || key === '0') { placeNumber(0); }
+    else if (key === 'ArrowUp' && selectedCell.r > 0) { selectCell(selectedCell.r - 1, selectedCell.c); }
+    else if (key === 'ArrowDown' && selectedCell.r < 8) { selectCell(selectedCell.r + 1, selectedCell.c); }
+    else if (key === 'ArrowLeft' && selectedCell.c > 0) { selectCell(selectedCell.r, selectedCell.c - 1); }
+    else if (key === 'ArrowRight' && selectedCell.c < 8) { selectCell(selectedCell.r, selectedCell.c + 1); }
   });
+
+  document.getElementById('sdk-new').addEventListener('click', newGame);
+  document.getElementById('sdk-check').addEventListener('click', checkSolution);
+  buildNumpad();
+  newGame();
 })();
 </script>
 </body>
-</html>
+  </html>
